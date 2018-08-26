@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.girltv.core.dao.VideoMapper">
+
+	<resultMap id="videoMap" type="video">
+		<result property="videoId" column="video_id" />
+		<result property="videoTitle" column="video_title" />
+		<result property="videoUrl" column="video_url" />
+		<result property="videoArticle" column="video_article" />
+		<result property="singerName" column="singer_name" />
+	</resultMap>
+	
+	<sql id="videoFieldList">
+		video_id
+		, video_title
+		, video_url
+		, video_article
+		, singer_name
+	</sql>
+	
+	<!-- videoId로 동영상 정보 조회 -->
+	<select id="selectVideoByVideoId" parameterType="int" resultMap="videoMap">
+		/* com.girltv.core.dao.VideoMapper.selectVideoByVideoId */
+		SELECT
+			<include refid="videoFieldList"/>
+		FROM
+			video
+		WHERE
+			video_id = #{videoId}
+	</select>
+	
+	<!-- video 개수 조회 -->
+	<select id="selectVideoCount" resultType="int">
+		/* com.girltv.core.dao.VideoMapper.selectVideoCount */
+		SELECT
+			COUNT(*)
+		FROM
+			video
+	</select>
+	
+	
+	<!-- video 목록 조회 -->
+	<select id="selectVideoList" parameterType="map" resultMap="videoMap">
+	    /* com.girltv.core.dao.VideoMapper.selectVideoList */
+		SELECT
+			<include refid="videoFieldList"/>
+		FROM
+			video
+		ORDER BY
+			video_id DESC
+		<if test="pageSize != 0">
+		LIMIT
+			#{offset}, #{pageSize}
+		</if>
+	</select>
+</mapper>

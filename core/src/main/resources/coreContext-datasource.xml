@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	<!-- DataSource Configuration -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="#{jdbc['girltv.jdbc.mysql.driverClassName']}" />
+		<property name="url" value="#{jdbc['girltv.jdbc.mysql.url']}" />
+		<property name="username" value="#{jdbc['girltv.jdbc.mysql.username']}" />
+		<property name="password" value="#{jdbc['girltv.jdbc.mysql.password']}" />
+		<property name="initialSize" value="#{jdbc['girltv.jdbc.mysql.initialSize']}" />
+		<property name="maxActive" value="#{jdbc['girltv.jdbc.mysql.maxActive']}" />
+		<property name="minIdle" value="#{jdbc['girltv.jdbc.mysql.minIdle']}" />
+		<property name="maxWait" value="#{jdbc['girltv.jdbc.mysql.maxWait']}" />
+		<property name="poolPreparedStatements" value="#{jdbc['girltv.jdbc.mysql.poolPreparedStatements']}" />
+		<property name="maxOpenPreparedStatements" value="#{jdbc['girltv.jdbc.mysql.maxOpenPreparedStatements']}" />
+	</bean>
+</beans>
